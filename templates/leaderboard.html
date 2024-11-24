@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Leaderboard</title>
+</head>
+<body>
+    <h1>Game Leaderboard</h1>
+    <table border="1" style="width: 100%; text-align: center;">
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Score</th>
+                <th>Photo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in leaderboard %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ entry['username'] }}</td>
+                <td>{{ entry['score'] }}</td>
+                <td>
+                    {% if entry['photo'] != "No Photo" %}
+                    <img src="{{ entry['photo'] }}" alt="Photo" style="width:100px;">
+                    {% else %}
+                    No Photo
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Control Game</h2>
+    <form method="POST" style="margin-top: 20px;">
+        <div>
+            <label for="username"><strong>Enter your name:</strong></label><br>
+            <input type="text" id="username" name="username" required style="width: 100%; padding: 5px;">
+        </div>
+        <br>
+        <div>
+            <strong>Take a photo after game ends?</strong><br>
+            <input type="radio" id="yes_photo" name="take_photo" value="yes" checked> 
+            <label for="yes_photo">Yes</label>
+            <input type="radio" id="no_photo" name="take_photo" value="no"> 
+            <label for="no_photo">No</label>
+        </div>
+        <br>
+        <div>
+            <button type="submit" style="padding: 10px 20px; font-size: 16px;">Submit</button>
+        </div>
+    </form>
+</body>
+</html>
